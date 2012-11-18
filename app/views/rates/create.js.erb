@@ -1,0 +1,5 @@
+<% if @rate.rate_type.to_i == @rate.artist_rate_type %>
+$(".user_rated").html("<%= escape_javascript(render partial: "user_rated", locals: {rates: @user_rated}) %>");
+<% elsif @rate.rate_type.to_i == @rate.song_rate_type %>
+$(".user_rated").html("<%= escape_javascript(render partial: "user_rated_song", locals: {rates: @user_rated}) %>");
+<% end %>

@@ -1,0 +1,6 @@
+<% if @yt_video_id %>
+        current = <%= @index %>;
+	onYouTubeIframeAPIReady('rec_' + "<%= @song.id %>", "<%= @yt_video_id %>");
+<% else %>
+	$('#rec_' + "<%= @song.id %>").html("<h4>Can`t find this on youtube</h4>");
+<% end %>

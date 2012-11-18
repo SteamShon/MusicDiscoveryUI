@@ -1,0 +1,2 @@
+$('#songs_' + '<%= @artist.id %>_<%= @album_index %>').html("<%= 
+escape_javascript(render partial: 'album_songs', locals: { songs: @songs, album_index: @album_index, id: @artist.id }); %>");

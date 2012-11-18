@@ -1,0 +1,9 @@
+<%= form_for(SongRate.new, { remote: true, class: "form-inline" }) do |f| %>
+  <%= f.hidden_field :tag_id, value: params[:tag_id] %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <%= f.hidden_field :song_id, value: song.id %>
+  
+  <%= f.select :score, options_for_select((-1..10)), { include_blank: true } %>
+  <%= f.submit "Rate", { class: "btn" } %>
+<% end %>
+

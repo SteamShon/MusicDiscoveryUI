@@ -1,0 +1,28 @@
+<h2>Algorithm: <%=@solver_name %></h2>
+
+<%= link_to "Play All", new_song_path(user_id: current_user.id, tag_id: params[:tag_id]), 
+    { class: "btn", remote: true, onclick: "alert('fetching video_id from youtube. after 5 minutes, auto play will start');" } %>
+<table class="table table-striped">
+	<tr>
+		<th>N.O</th>
+		<th>Title</th>
+		<th>Artist</th>
+		<th>Player</th>
+		<th>Rate</th>
+	</tr>
+<% num = 0 %>
+<% for song in songs %>
+	<tr>
+		<td><%= num %></td>
+		<td><%= link_to song.title, google_search(song.title + " " + song.artist_name), target: "_blank" %></td>
+		<td><%= link_to song.artist_name, google_search(song.artist_name), target: "_blank" %></td>
+		<td>
+		    <div id="rec_<%= song.id %>" class="yt">
+			<%= link_to "Youtube Player", song_path(id: song.id, index: num), { remote: true } %>
+		    </div>
+                </td>
+		<td><%= render partial: "song_rates/form", locals: { song: song } %></td>
+	</tr>
+	<% num += 1 %>
+<% end %>
+</table>

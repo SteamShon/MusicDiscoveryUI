@@ -1,0 +1,10 @@
+<% for rate in rates %>
+  	<div class="artist well" id="<%= rate.song_id %>">
+        <h4><%= rate.song ? rate.song.title : "" %>
+        , <%= rate.score %>
+        </h4>
+          <%= link_to '<i class="icon-remove"></i>'.html_safe, 
+              rate, confirm: "Are you sure?", 
+              method: :delete, remote: true %>
+    </div>
+<% end %>

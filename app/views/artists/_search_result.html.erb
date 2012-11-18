@@ -1,0 +1,8 @@
+<% for artist in artists %>
+    <div class="span2 well">
+      <%= link_to artist.artist_name, google_search(artist.artist_name), target: "_blank" %>
+      <%= render partial: "artist_rates/form", locals: { artist: artist } %>
+    </div>
+<% end %>
+
+

@@ -1,0 +1,3 @@
+//$(".user_recs").html("<%= escape_javascript(render partial: 'song', collection: @songs  ) %>");
+$(".user_recs").html("<%= escape_javascript(render partial: 'response', locals: { songs: @songs } ) %>");
+video_id_list = "<%= @songs.collect{|song| song.id}.join(',') %>";

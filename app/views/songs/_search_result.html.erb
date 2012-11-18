@@ -1,0 +1,14 @@
+<% for song in @songs %>
+    <div class="span2 well">
+      <%= artist.artist_name %>
+      <%#= image_tag artist.image %>
+      <%= form_for(Rate.new, { remote: true, class: "form-inline" }) do |f| %>
+        <%= f.hidden_field :user_id, value: params[:user_id] %>
+        <%= f.hidden_field :eartist_id, value: artist.eartist_id %>
+        <%= f.select :score, options_for_select((1..10)),
+            { include_blank: true }, class: "input-small" %>
+        <br />
+        <%= f.submit "Rate", { class: "btn" } %>
+      <% end %>
+    </div>
+<% end %>

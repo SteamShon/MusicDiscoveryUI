@@ -1,0 +1,30 @@
+<h2>Algorithm: <%=@solver_name %></h2>
+<table class="table table-striped">
+  <tr>
+    <th>N.O.</th>
+    <th>Artist</th>
+    <th>Tags</th>
+    <th>Albums > Songs</th>
+    <th>Rate Artist</td>
+  </tr>
+<% num = 0 %>
+<% for artist in artists %>
+  <tr>
+    <td><%= num %></td>
+    <td><%= link_to artist.artist_name, 
+              "http://www.google.com/search?q=#{artist.artist_name}", target: "_blank" %>
+    </td>
+    <td><%= link_to "Show Terms", { action: "show_terms", id: artist.id }, { class: "btn btn-small", remote: true } %>
+      	<div id="terms_<%= artist.id %>">
+        </div>
+    </td>
+    <td><%= link_to "Show Albums", { action: "show_albums", id: artist.id }, { class: "btn btn-small", remote: true } %>
+        <div id="albums_<%= artist.id %>">
+        </div>
+    </td>
+    <td><%= render partial: "artist_rates/form", locals: { artist: artist } %></td>
+  </tr>
+<% num += 1%>
+<% end %>
+
+</table>

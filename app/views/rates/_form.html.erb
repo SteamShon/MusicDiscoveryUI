@@ -1,0 +1,14 @@
+<%= form_for(Rate.new, { remote: true, class: "form-search" }) do |f| %>
+  <%= f.hidden_field :tag_id, value: params[:tag_id] %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <% if artist %>
+    <%= f.hidden_field :eartist_id, value: artist.eartist_id %>
+  <% elsif song %>
+    <%= f.hidden_field :eartist_id, value: song.song_id %>
+  <% end %>
+  <%= f.hidden_field :rate_type, value: rate_type ? rate_type : 0 %>
+  <%= f.select :score, options_for_select((1..10)), { include_blank: true } %>
+  <br />
+  <%= f.submit "Rate", { class: "btn" } %>
+<% end %>
+

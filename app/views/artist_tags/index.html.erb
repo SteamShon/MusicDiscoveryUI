@@ -1,0 +1,25 @@
+<h1>Listing artist_tags</h1>
+
+<table class="table table-striped">
+  <tr>
+    <th>User</th>
+    <th>Title</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @artist_tags.each do |artist_tag| %>
+  <tr>
+    <td><%= artist_tag.user_id %></td>
+    <td><%= link_to artist_tag.title, artists_path(tag_id: artist_tag.id) %></td>
+    <td><%= link_to 'Show', artist_tag %></td>
+    <td><%= link_to 'Edit', edit_artist_tag_path(artist_tag) %></td>
+    <td><%= link_to 'Destroy', artist_tag, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Artist tag', new_artist_tag_path %>

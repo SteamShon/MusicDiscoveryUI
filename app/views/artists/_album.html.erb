@@ -1,0 +1,12 @@
+<% album_index = 0 %>
+<ol>
+<% for album in albums %>
+    <li><%= album.release %> 
+        <%= link_to 'Songs'.html_safe, 
+        { action: "show_songs", id: @artist.id, album_index: album_index }, 
+        { class: "btn btn-small", remote: true } %></li>
+    <div id="songs_<%= @artist.id %>_<%= album_index %>">
+    </div> 
+    <% album_index += 1 %>
+<% end %>
+</ol>

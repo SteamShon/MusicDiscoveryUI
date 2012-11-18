@@ -1,0 +1,6 @@
+$(".info").html("<h1>loading</h1>");
+<% if @rate.rate_type == @rate.artist_rate_type %>
+  $(".user_rated").html("<%= render partial: 'user_rated' %>");
+<% elsif @rate.rate_type == @rate.song_rate_type %>
+  $(".user_rated").html("<%= render partial: 'user_rated_song' %>");
+<% end %>

@@ -1,0 +1,93 @@
+<%= content_for :scripts do %>
+   <script type="text/javascript">
+	var tag = document.createElement('script');
+	tag.src = "//www.youtube.com/iframe_api";
+	var firstScriptTag = document.getElementsByTagName('script')[0];
+	firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        
+	var current = 0;
+        var vidio_id_list = '';
+        var song_id_list = '';
+        var song_ids = [];
+	var video_ids = [];
+        function playAll() {
+		song_ids = song_id_list.split(',');
+        	video_ids = video_id_list.split(',');
+		onYouTubeIframeAPIReady('rec_' + song_ids[current], video_ids[current]);
+        }
+        function onYouTubeIframeAPIReady(id, video_id) {
+	  var player = new YT.Player(id, {
+	    height: '390',
+	    width: '640',
+	    videoId: video_id,
+	    events: {
+	      'onReady': onPlayerReady,
+	      'onStateChange': onPlayerStateChange
+	    }
+	  });
+	}
+	function onPlayerReady(event) {
+	   event.target.playVideo();
+	}
+	function onPlayerStateChange(event) {
+	   if (event.data == YT.PlayerState.PLAYING && !done) {
+	     setTimeout(stopVideo, 300000);
+	     var done = true;
+	   } else if (event.data == YT.PlayerState.ENDED) {
+	     current += 1;
+	     onYouTubeIframeAPIReady('rec_' + song_ids[current], video_ids[current]);
+	   } 
+	}
+	function stopVideo() {
+	   player.stopVideo();
+	}
+
+   </script>
+<% end %>
+
+<h1>Artist Discovery</h1>
+
+<div class="alert alert-block">
+	<button type="button" class="close" data-dismiss="alert">×</button>
+	<h4>Guiude!</h4>
+	<ol>
+	  <li>This site implements ALS-WR, Item-Based-CF, Label Propagation algorithms for song recommendation</li>
+	  <li>Search 5~10 similar songs(you liked) by song/artist on search form and rate them</li>
+	  <li>Once you rated more than 5~10 songs, then click analyze to discover</li>
+	  <li>Note: Analyze will takes about 1 minutes to run algorithms back end. be patient</li>
+	  <li>Dataset: <a href="http://labrosa.ee.columbia.edu/millionsong">million song dataset challenge from Kaggle</a></li>
+	  <li>Stats: |Song| = 384,546 |User| = 1,019,318 |Edges| = 48,373,586</li>
+          <li>Algorithms: </li>
+          <li><%= link_to "ALS-WR",  "https://sites.google.com/site/steamshon/", target: "_blank" %></li>
+	  <li><%= link_to "Item Based CF", "http://www.ke.tu-darmstadt.de/events/PL-12/papers/08-aiolli.pdf", target: "_blank" %></li>
+	  <li><%= link_to "Lable Propagation", 
+		"http://shom83.blogspot.kr/2012/11/belief-propagationproduct-sum-with.html", target: "_blank"%></li>
+	</ol>
+</div>
+<div class="row">
+  <div class="span8">
+  <%= form_tag artists_path, { class: "form-search", method: :get, remote: true,
+	onclick: "alert('calculating...');" } do %>
+    <%= hidden_field_tag :tag_id, params[:tag_id] %>
+    <%= select_tag :solver_type, options_for_select(Artist.solver_types) %>
+    <%= submit_tag "Analyze" %>
+  <% end %>
+  </div>
+</div>
+<div class="row">
+  <div class="span8 user_rated">
+    <h3>What you rated so far...</h3>
+    <%= render partial: "/artist_rates/user_rated", locals: { rates: @user_rated } %>
+  </div>
+  <div class="span4">
+    <%= render partial: "/shared/search", locals: { path: artists_path } %>
+    <%= render partial: "search_result", locals: { artists: @search_result } %>  
+    <%= will_paginate @search_result %>
+  </div>
+</div>
+<hr />
+
+<div class="row">
+  <div class="span12 user_recs">
+  </div>
+</div>

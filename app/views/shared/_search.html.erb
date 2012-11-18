@@ -1,0 +1,6 @@
+<%= form_tag(path, {class: "form-inline", method: :get }) do %>
+  <%= hidden_field_tag :tag_id, params[:tag_id] %>
+  <%= text_field_tag :query, params[:query], 
+      {class: "input-large search-query", placeholder: "search by song or artist" } %>
+  <%= submit_tag "search", {class: "btn"} %>
+<% end %>

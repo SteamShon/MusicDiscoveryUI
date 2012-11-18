@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @artist_tag.user_id %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%= @artist_tag.title %>
+</p>
+
+
+<%= link_to 'Edit', edit_artist_tag_path(@artist_tag) %> |
+<%= link_to 'Back', artist_tags_path %>

@@ -1,0 +1,32 @@
+<h1>Listing tags</h1>
+<div class="alert alert-block">
+	<button type="button" class="close" data-dismiss="alert">×</button>
+	<h4>Guiude!</h4>
+	<ol>
+	  <li>Create new Tag for yourself. tag is conceptual group of musics you liked.</li>
+	</ol>
+</div>
+
+<table class="table table-striped">
+  <tr>
+    <th>User</th>
+    <th>Title</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @tags.each do |tag| %>
+  <tr>
+    <td><%= tag.user_id %></td>
+    <td><%= link_to tag.title, songs_path(tag_id: tag.id) %></td>
+    <td><%= link_to 'Show', tag %></td>
+    <td><%= link_to 'Edit', edit_tag_path(tag) %></td>
+    <td><%= link_to 'Destroy', tag, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Tag', new_tag_path, {class: "btn btn-large"} %>

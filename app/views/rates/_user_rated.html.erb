@@ -1,0 +1,11 @@
+<% for rate in rates %>
+  	<div class="artist well" id="<%= rate.eartist_id %>">
+        <h4><%= rate.artist ? rate.artist.artist_name : "" %>
+        , <%= rate.score %>
+        </h4>
+        <%#= image_tag rate.artist.image %>
+          <%= link_to '<i class="icon-remove"></i>'.html_safe, 
+              rate, confirm: "Are you sure?", 
+              method: :delete, remote: true %>
+    </div>
+<% end %>

@@ -1,0 +1,25 @@
+<%= form_for(@artist_tag) do |f| %>
+  <% if @artist_tag.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@artist_tag.errors.count, "error") %> prohibited this artist_tag from being saved:</h2>
+
+      <ul>
+      <% @artist_tag.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.hidden_field :user_id, value: current_user.id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

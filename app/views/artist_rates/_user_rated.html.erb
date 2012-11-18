@@ -1,0 +1,22 @@
+<table class="table table-striped">
+	<tr>
+		<th>N.O</th>
+		<th>Artist</th>
+		<th>Rate</th>
+		<th></th>
+	</tr>
+	<tr>
+<% num = 0 %>
+<% for rate in rates %>
+	<tr>	
+		<td><%= num %></td>
+		<td><%= rate.artist ? rate.artist.artist_name : "" %></td>
+		<td><%= rate.score %></td>
+		<td><%= link_to '<i class="icon-remove"></i>'.html_safe,
+              rate, confirm: "Are you sure?",
+              method: :delete, remote: true %></td>
+	</tr>
+	<% num += 1 %>
+<% end %>
+</table>
+
