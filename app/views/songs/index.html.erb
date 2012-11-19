@@ -16,6 +16,8 @@
 		onYouTubeIframeAPIReady('rec_' + song_ids[current], video_ids[current]);
         }
         function onYouTubeIframeAPIReady(id, video_id) {
+	  console.log(id);
+	  console.log(video_id);
 	  var player = new YT.Player(id, {
 	    height: '390',
 	    width: '640',
@@ -66,7 +68,7 @@
 <div class="row">
   <div class="span8">
   <%= form_tag songs_path, { class: "form-search", method: :get, remote: true, 
-	onclick: "alert('calculating...');" } do %>
+	onclick: "alert('calculating...depends on algorithm this can take minute.');" } do %>
     <%= hidden_field_tag :tag_id, params[:tag_id] %>
     <%= select_tag :solver_type, options_for_select(Artist.solver_types) %>
     <%= submit_tag "Analyze" %>

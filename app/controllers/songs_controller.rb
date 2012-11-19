@@ -30,7 +30,9 @@ class SongsController < ApplicationController
   def new
     respond_to do |respond|
       respond.js {
-	@songs = current_user.recs_song(params[:tag_id])
+	@solver_type = params[:solver_type]
+	@port = @solver_type.to_i == 2 ? 20040 : 20010
+	@songs = current_user.recs_song(params[:tag_id], @solver_type, @port)
         @song_id_list = @songs.collect{|song| song.id }.join(",") 
 	@video_id_list = @songs.collect{|song| song.youtube_video_id}.join(",")
       }
